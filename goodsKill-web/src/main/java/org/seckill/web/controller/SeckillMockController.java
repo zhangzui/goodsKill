@@ -35,8 +35,8 @@ public class SeckillMockController {
 
     @Autowired
     private SeckillService seckillService;
-    @Autowired
-    private JmsTemplate jmsTemplate;
+//    @Autowired
+//    private JmsTemplate jmsTemplate;
     @Resource(name = "taskExecutor")
     private ThreadPoolTaskExecutor taskExecutor;
     @Autowired
@@ -117,13 +117,13 @@ public class SeckillMockController {
         AtomicInteger atomicInteger = new AtomicInteger(0);
         for (int i = 0; i < requestCount; i++) {
             taskExecutor.execute(() -> {
-                jmsTemplate.send((Session session) -> {
-                    Message message = session.createMessage();
-                    message.setLongProperty("seckillId", seckillId);
-                    message.setStringProperty("userPhone", String.valueOf(atomicInteger.incrementAndGet()));
-                    message.setStringProperty("note", String.valueOf("秒杀场景三(activemq消息队列实现)"));
-                    return message;
-                });
+//                jmsTemplate.send((Session session) -> {
+//                    Message message = session.createMessage();
+//                    message.setLongProperty("seckillId", seckillId);
+//                    message.setStringProperty("userPhone", String.valueOf(atomicInteger.incrementAndGet()));
+//                    message.setStringProperty("note", String.valueOf("秒杀场景三(activemq消息队列实现)"));
+//                    return message;
+//                });
             });
         }
         //待mq监听器处理完成打印日志，不在此处打印日志
@@ -190,26 +190,26 @@ public class SeckillMockController {
         prepareSeckill(seckillId, 10);
         log.info("秒杀场景六(返回执行结果的秒杀,30秒超时,activeMq实现)开始时间：{},秒杀id：{}", new Date(), seckillId);
 
-        Message mes = jmsTemplate.sendAndReceive(new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                Message message = session.createMessage();
-                message.setLongProperty("seckillId", seckillId);
-                message.setStringProperty("userPhone", userPhone);
-                // 指定服务方应答到临时队列中，请求方最终从临时队列获取消息
-                message.setJMSReplyTo(session.createTemporaryQueue());
-                // 消息超时时间设置为5分钟
-                message.setJMSExpiration(5 * 60 * 1000);
-                message.setJMSCorrelationID(UUID.randomUUID().toString());
-                return message;
-            }
-        });
+//        Message mes = jmsTemplate.sendAndReceive(new MessageCreator() {
+//            @Override
+//            public Message createMessage(Session session) throws JMSException {
+//                Message message = session.createMessage();
+//                message.setLongProperty("seckillId", seckillId);
+//                message.setStringProperty("userPhone", userPhone);
+//                // 指定服务方应答到临时队列中，请求方最终从临时队列获取消息
+//                message.setJMSReplyTo(session.createTemporaryQueue());
+//                // 消息超时时间设置为5分钟
+//                message.setJMSExpiration(5 * 60 * 1000);
+//                message.setJMSCorrelationID(UUID.randomUUID().toString());
+//                return message;
+//            }
+//        });
         String result = "";
-        try {
-            result = mes.getStringProperty("message");
-        } catch (JMSException e) {
-            log.warn(e.getMessage(), e);
-        }
+//        try {
+////            result = mes.getStringProperty("message");
+//        } catch (JMSException e) {
+//            log.warn(e.getMessage(), e);
+//        }
         log.info("秒杀场景六(返回执行结果的秒杀,30秒超时,activeMq实现)结束时间：{},秒杀id：{}", new Date(), seckillId);
         return result;
     }

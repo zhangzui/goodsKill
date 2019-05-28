@@ -297,8 +297,8 @@ public class SeckillServiceImpl extends AbstractServiceImpl<SeckillMapper, Secki
 
     @Override
     public void afterPropertiesSet() {
-        Config config = new Config();
-        config.useSingleServer().setAddress(propertiesUtil.getProperty("cache_ip_address"));
-        redissonClient = Redisson.create(config);
+//        Config config = new Config();
+//        config.useSingleServer().setAddress(propertiesUtil.getProperty("cache_ip_address"));
+//        redissonClient = Redisson.create(config);
     }
 }

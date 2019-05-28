@@ -33,8 +33,8 @@ public class UserAccountServiceImpl extends AbstractServiceImpl<UserMapper, User
     private PermissionMapper permissionMapper;
     @Autowired
     private RoleMapper roleMapper;
-    @Resource
-    private JmsTemplate jmsTemplate;
+//    @Resource
+//    private JmsTemplate jmsTemplate;
 
     @Override
     public void register(User user) {

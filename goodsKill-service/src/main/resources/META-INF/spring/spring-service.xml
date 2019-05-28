@@ -11,7 +11,7 @@
    <!--aop支持,支持方法内部调用-->
    <aop:aspectj-autoproxy expose-proxy="true"/>
 
-   <context:component-scan base-package="org.seckill.service;" />
+   <context:component-scan base-package="org.seckill.service" />
 
    <!--线程池-->
    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">

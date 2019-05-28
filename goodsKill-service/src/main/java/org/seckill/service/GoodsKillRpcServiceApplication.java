@@ -1,6 +1,7 @@
 package org.seckill.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.seckill.dao.UserRoleMapper;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -17,7 +18,13 @@ public class GoodsKillRpcServiceApplication {
                 "classpath*:META-INF/spring/spring-*.xml");
         // 程序退出前优雅关闭JVM
         context.registerShutdownHook();
+
         context.start();
+
+        UserRoleMapper userRoleMapper = (UserRoleMapper) context.getBean("userRoleMapper");
+        System.out.println(userRoleMapper.selectByPrimaryKey(1));
+
+
         log.info(">>>>> goodsKill-rpc-service 启动完成 <<<<<");
     }
 

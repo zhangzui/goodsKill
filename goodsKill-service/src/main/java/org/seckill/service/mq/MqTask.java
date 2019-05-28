@@ -13,25 +13,25 @@ import javax.jms.Session;
 
 @Component
 public class MqTask {
-    @Autowired
-    @Qualifier("jmsTopicTemplate")
-    private JmsTemplate jmsTopicTemplate;
+//    @Autowired
+//    @Qualifier("jmsTopicTemplate")
+//    private JmsTemplate jmsTopicTemplate;
     @Autowired
     private SeckillService seckillService;
 
     public void sendSeckillSuccessTopic(long seckillId, String note) {
         seckillService.getSuccessKillCount(seckillId);
         long finalSeckillId = seckillId;
-        jmsTopicTemplate.send(new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                Message message = session.createMessage();
-                message.setLongProperty("seckillId", finalSeckillId);
-                message.setBooleanProperty("status", true);
-                message.setStringProperty("note", note);
-                return message;
-            }
-        });
+//        jmsTopicTemplate.send(new MessageCreator() {
+//            @Override
+//            public Message createMessage(Session session) throws JMSException {
+//                Message message = session.createMessage();
+//                message.setLongProperty("seckillId", finalSeckillId);
+//                message.setBooleanProperty("status", true);
+//                message.setStringProperty("note", note);
+//                return message;
+//            }
+//        });
     }
 
 }

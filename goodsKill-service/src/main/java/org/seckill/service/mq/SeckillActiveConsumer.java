@@ -19,9 +19,9 @@ public class SeckillActiveConsumer extends AbstractMqConsumer implements Message
     ExtSeckillMapper extSeckillMapper;
     @Autowired
     SuccessKilledMapper successKilledMapper;
-    @Autowired
-    @Qualifier("jmsTemplate")
-    private JmsTemplate jmsTemplate;
+//    @Autowired
+//    @Qualifier("jmsTemplate")
+//    private JmsTemplate jmsTemplate;
 
     /**
      * 监听消息
@@ -46,15 +46,15 @@ public class SeckillActiveConsumer extends AbstractMqConsumer implements Message
         // 处理成功后给请求发送回复,前提是请求方要求应答
         try {
             if (message.getJMSReplyTo() != null) {
-                jmsTemplate.send(message.getJMSReplyTo(), new MessageCreator() {
-                    @Override
-                    public Message createMessage(Session session) throws JMSException {
-                        Message mes = session.createMessage();
-                        mes.setJMSCorrelationID(message.getJMSCorrelationID());
-                        mes.setStringProperty("message", "dealSuccess!");
-                        return mes;
-                    }
-                });
+//                jmsTemplate.send(message.getJMSReplyTo(), new MessageCreator() {
+//                    @Override
+//                    public Message createMessage(Session session) throws JMSException {
+//                        Message mes = session.createMessage();
+//                        mes.setJMSCorrelationID(message.getJMSCorrelationID());
+//                        mes.setStringProperty("message", "dealSuccess!");
+//                        return mes;
+//                    }
+//                });
             }
         } catch (JMSException e) {
             log.warn(e.getMessage(), e);

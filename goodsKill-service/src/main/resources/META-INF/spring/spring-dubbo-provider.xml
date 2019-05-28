@@ -10,20 +10,20 @@
 
     <dubbo:application name="goodsKill-provider"/>
 
-    <dubbo:registry address="${zookeeper_address}" check="false" subscribe="false" register=""/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
 
-    <dubbo:service ref="userAccountServiceImpl" interface="org.seckill.api.service.UserAccountService" timeout="1000000"/>
+    <dubbo:service ref="userAccountServiceImpl" interface="org.seckill.api.service.UserAccountService" timeout="10000"/>
     <!-- 接口服务 -->
-    <dubbo:service ref="goodsServiceImpl" interface="org.seckill.api.service.GoodsService" timeout="1000000"/>
+    <dubbo:service ref="goodsServiceImpl" interface="org.seckill.api.service.GoodsService" timeout="10000"/>
 
-    <dubbo:service ref="seckillServiceImpl" interface="org.seckill.api.service.SeckillService" timeout="1000000" retries="0"/>
+    <dubbo:service ref="seckillServiceImpl" interface="org.seckill.api.service.SeckillService" timeout="10000" retries="0"/>
 
-    <dubbo:service ref="roleServiceImpl" interface="org.seckill.api.service.RoleService" timeout="1000000" retries="0"/>
+    <dubbo:service ref="roleServiceImpl" interface="org.seckill.api.service.RoleService" timeout="10000" retries="0"/>
 
-    <dubbo:service ref="userRoleServiceImpl" interface="org.seckill.api.service.UserRoleService" timeout="1000000" retries="0"/>
+    <dubbo:service ref="userRoleServiceImpl" interface="org.seckill.api.service.UserRoleService" timeout="10000" retries="0"/>
 
-    <dubbo:service ref="permissionServiceImpl" interface="org.seckill.api.service.PermissionService" timeout="1000000" retries="0"/>
+    <dubbo:service ref="permissionServiceImpl" interface="org.seckill.api.service.PermissionService" timeout="10000" retries="0"/>
 
-    <dubbo:service ref="rolePermissionServiceImpl" interface="org.seckill.api.service.RolePermissionService" timeout="1000000" retries="0"/>
+    <dubbo:service ref="rolePermissionServiceImpl" interface="org.seckill.api.service.RolePermissionService" timeout="10000" retries="0"/>
 
 </beans>
